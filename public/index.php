@@ -21,16 +21,7 @@ $app = AppFactory::create();
 
 // $serverRequest = ServerRequestCreatorFactory::create();
 
-$app->get('/api/posts', function (Request $request, Response $response, $args) {
-
-    $repository = $this->get(App\Repositories\PostRepository::class);
-
-    $data = $repository->getAll();
-
-    $body = json_encode($data);
-    $response->getBody()->write($body);
-    return $response;
-});
+$app->get('/api/posts', App\Controllers\PostIndex::class);
 
 $error_middleware = $app->addErrorMiddleware(true, true, true);
 
