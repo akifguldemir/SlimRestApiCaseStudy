@@ -21,7 +21,7 @@ $app = AppFactory::create();
 
 // $serverRequest = ServerRequestCreatorFactory::create();
 
-$app->get('/api/posts', App\Controllers\PostIndex::class);
+$app->get('/api/posts', App\Controllers\Post::class. ':showAll');
 
 $error_middleware = $app->addErrorMiddleware(true, true, true);
 

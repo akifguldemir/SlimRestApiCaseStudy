@@ -8,13 +8,13 @@ use App\Repositories\PostRepository;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-class PostIndex
+class Post
 {
     public function __construct(private PostRepository $repository)
     {
     }
 
-    public function __invoke(Request $request, Response $response): Response
+    public function showAll(Request $request, Response $response): Response
     {
         $data = $this->repository->getAll();
     
