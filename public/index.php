@@ -1,17 +1,34 @@
 <?php
+declare(strict_types=1);
+
 use Slim\Factory\AppFactory;
 use Slim\Factory\ServerRequestCreatorFactory;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use DI\Container;
+
 
 require __DIR__ . '/../vendor/autoload.php';
+
+$container = new Container;
+AppFactory ::setContainer($container);
 
 $app = AppFactory::create();
 $serverRequest = ServerRequestCreatorFactory::create();
 
-$app->get('/', function (Request $request, Response $response, $args) {
-    $response->getBody()->write("Hello world!");
-    return $response;
+$app->get('/api/posts', function (Request $request, Response $response, $args) {
+
+    $database = $this->get(App\Database::class);
+
+    $repository = new $this->get(App\Repositories\PostRepository::class);
+
+    $data = $repository->getAll();
+
+    $body = json_encode($data);
+    $response->getBody()->write($body);
+    return $response->withHeader("Content-Type","application/json");
 });
 
 $app->run();
+
+
