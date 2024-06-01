@@ -20,7 +20,11 @@ $app->get('/api/posts', function (Request $request, Response $response, $args) {
 
     $database = $this->get(App\Database::class);
 
+<<<<<<< HEAD
     $repository = new $this->get(App\Repositories\PostRepository::class);
+=======
+    $repository = new App\Repositories\PostRepository($database);
+>>>>>>> 18b94a9757a4857fa1967bf7e853ad84ee95a2a9
 
     $data = $repository->getAll();
 
