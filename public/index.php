@@ -5,12 +5,14 @@ use Slim\Factory\AppFactory;
 use Slim\Factory\ServerRequestCreatorFactory;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use DI\Container;
+use DI\ContainerBuilder;
 
+define("APP_ROOT",dirname(__DIR__));
 
-require __DIR__ . '/../vendor/autoload.php';
+require APP_ROOT . '/vendor/autoload.php';
 
-$container = new Container;
+$builder = new ContainerBuilder;
+$container = $builder->addDefinitions(APP_ROOT . '/config/definitions.php')->build();
 AppFactory ::setContainer($container);
 
 $app = AppFactory::create();
