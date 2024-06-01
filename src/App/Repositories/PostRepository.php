@@ -25,21 +25,26 @@ class PostRepository
 
     public function create(array $data): string
     {
-        $sql = "INSERT INTO post (title, body, userId) VALUES (:title, :body, :userId)";
 
+        $sql = "INSERT INTO post (id, title, body, userId) VALUES (:id, :title, :body, :userId)";
         $pdo = $this->database->getConnection();
 
         $stmt = $pdo->prepare($sql);
 
-        $stmt->bindValue("title", $data["title"], PDO::PARAM_STR);
-        $stmt->bindValue("body", $data["body"], PDO::PARAM_STR);
-        $stmt->bindValue("userId", $data["userId"], PDO::PARAM_INT);
+        $stmt->bindValue(":id", $data["id"], PDO::PARAM_INT);
+        $stmt->bindValue(":title", $data["title"], PDO::PARAM_STR);
+        $stmt->bindValue(":body", $data["body"], PDO::PARAM_STR);
+        $stmt->bindValue(":userId", $data["userId"], PDO::PARAM_INT);
 
-        $stmt->execute();
-
-        return $pdo->lastInsertId();
-
+        try {
+            $stmt->execute();
+            return $pdo->lastInsertId();
+        } catch (\PDOException $e) {
+            // Hata durumunda bir loglama mekanizması veya başka bir işlem gerçekleştirebilirsiniz
+            throw new \Exception("Post kaydedilemedi: " . $e->getMessage());
+        }
     }
+
     public function delete(int $id): int
     {
         $sql = "DELETE FROM post WHERE id = :id";
