@@ -35,6 +35,12 @@ $app->get('/api/posts/{id:[0-9]+}', function (Request $request, Response $respon
    $repository = $this->get(App\Repositories\PostRepository::class);
    $product = $repository->getById((int)$args['id']);
 
+   if($product === false)
+   {
+    throw new \Slim\Exception\HttpNotFoundException($request,
+                message: "Post couldn't found");
+   }
+
    $body = json_encode($product);
 
    $response->getBody()->write($body);
