@@ -22,17 +22,6 @@ class PostRepository
         return  $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     }
-    public function getById(int $id): array|bool
-    {
-        $sql = "SELECT * from post where id = :id";
-        $pdo = $this->database->getConnection();
-        $stmt = $pdo->prepare($sql);
-
-        $stmt->bindValue("id", $id, PDO::PARAM_INT);
-        $stmt->execute();   
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-
-    }
 
     public function create(array $data): string
     {
