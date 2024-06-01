@@ -30,6 +30,18 @@ $app->get('/api/posts', function (Request $request, Response $response, $args) {
     return $response->withHeader("Content-Type","application/json");
 });
 
+$app->get('/api/posts/{id:[0-9]+}', function (Request $request, Response $response, $args) {
+
+   $repository = $this->get(App\Repositories\PostRepository::class);
+   $product = $repository->getById((int)$args['id']);
+
+   $body = json_encode($product);
+
+   $response->getBody()->write($body);
+   return $response->withHeader("Content-Type","application/json");
+
+});
+
 $app->run();
 
 
