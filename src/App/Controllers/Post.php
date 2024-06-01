@@ -24,4 +24,19 @@ class Post
     
         return $response;
     }
+
+    public function delete(Request $request, Response $response, array $args): Response
+    {
+        $rows = $this->repository->delete((int)$args['id']);
+
+        $body = json_encode([
+            'message' => 'Post deleted',
+            'rows' => $rows
+        ]);
+
+        $response->getBody()->write($body); 
+        return $response;
+    }
+
+   
 }

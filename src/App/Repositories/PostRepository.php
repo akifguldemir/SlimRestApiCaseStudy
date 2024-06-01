@@ -33,4 +33,33 @@ class PostRepository
         return $stmt->fetch(PDO::FETCH_ASSOC);
 
     }
+
+    public function create(array $data): string
+    {
+        $sql = "INSERT INTO post (title, body, userId) VALUES (:title, :body, :userId)";
+
+        $pdo = $this->database->getConnection();
+
+        $stmt = $pdo->prepare($sql);
+
+        $stmt->bindValue("title", $data["title"], PDO::PARAM_STR);
+        $stmt->bindValue("body", $data["body"], PDO::PARAM_STR);
+        $stmt->bindValue("userId", $data["userId"], PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        return $pdo->lastInsertId();
+
+    }
+    public function delete(int $id): int
+    {
+        $sql = "DELETE FROM post WHERE id = :id";
+
+        $pdo = $this->database->getConnection();
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->rowCount();
+    }
 }

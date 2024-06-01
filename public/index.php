@@ -30,23 +30,7 @@ $error_handler->forceContentType("application/json");
 
 $app->add(new AddJsonResponseHeader);
 
-$app->get('/api/posts/{id:[0-9]+}', function (Request $request, Response $response, $args) {
-
-   $repository = $this->get(App\Repositories\PostRepository::class);
-   $product = $repository->getById((int)$args['id']);
-
-   if($product === false)
-   {
-    throw new HttpNotFoundException($request,
-                message: "Post couldn't found");
-   }
-
-   $body = json_encode($product);
-
-   $response->getBody()->write($body);
-   return $response;
-
-});
+$app->delete("/api/posts/{id:[0-9]+}", App\Controllers\Post::class. ':delete');
 
 $app->run();
 
