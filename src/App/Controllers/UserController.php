@@ -28,7 +28,6 @@ class UserController
                     $responseData = json_encode([
                         'status' => 'success',
                         'message' => 'Login başarılı. Yönlendiriliyor..',
-                        'user' => $user,
                         'code' => 200
                     ]);
                     $response->getBody()->write($responseData); 
