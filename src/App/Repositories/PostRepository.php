@@ -17,7 +17,7 @@ class PostRepository
 
         $pdo = $this->database->getConnection();
 
-        $stmt = $pdo->query('SELECT u.username, p.title, p.body from post p LEFT JOIN user u ON u.Id = p.userId');
+        $stmt = $pdo->query('SELECT p.id,u.username, p.title, p.body from post p LEFT JOIN user u ON u.Id = p.userId');
 
         return  $stmt->fetchAll(PDO::FETCH_ASSOC);
 
