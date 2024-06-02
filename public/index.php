@@ -32,6 +32,8 @@ $app->add(new AddJsonResponseHeader);
 
 $app->delete("/api/posts/{id:[0-9]+}", App\Controllers\Post::class. ':delete');
 
+$app->get("/api/login", App\Controllers\User::class. ':login');
+
 $app->run();
 
 
