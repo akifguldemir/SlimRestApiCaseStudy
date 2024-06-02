@@ -1,9 +1,9 @@
-Import users command : php import/import_users.php<br>
+Import users command : php import/import_users.php
 Import posts command : php import/import_posts.php<br>
 
-admin login bilgileri
-    username = admin
-    password = admin12345
+admin login bilgileri<br>
+    username = admin<br>
+    password = admin12345<br>
 
 standart kullanıcıların şifreleri 98765 olarak belirlendi. (Login olamazlar)
 
