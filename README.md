@@ -1,6 +1,6 @@
 Import users command : php import/import_users.php<br>
 Import posts command : php import/import_posts.php<br>
-Proje içerisinde db.sql olarak boş db template bulabilirsiniz.
+Proje içerisinde db.sql olarak boş db template bulabilirsiniz. Serverda db adı slimrestapi olarak belirlendi. config/definitions.php içerisinden değiştirilebilir.
 
 admin login bilgileri<br>
     username = admin<br>
