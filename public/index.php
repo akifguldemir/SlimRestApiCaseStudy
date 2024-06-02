@@ -5,6 +5,7 @@ use DI\ContainerBuilder;
 use Slim\Factory\AppFactory;
 use App\Controllers\PostController;
 use App\Controllers\UserController;
+use Tuupola\Middleware\CorsMiddleware;
 use App\Middleware\AddJsonResponseHeader;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Factory\ServerRequestCreatorFactory;
@@ -20,6 +21,15 @@ $container = $builder->addDefinitions(APP_ROOT . '/config/definitions.php')->bui
 AppFactory ::setContainer($container);
 
 $app = AppFactory::create();
+
+$app->add(new CorsMiddleware([
+    "origin" => ["*"],
+    "methods" => ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    "headers.allow" => ["Content-Type", "Authorization"],
+    "headers.expose" => [],
+    "credentials" => true,
+    "cache" => 0,
+]));
 
 // $serverRequest = ServerRequestCreatorFactory::create();
 
