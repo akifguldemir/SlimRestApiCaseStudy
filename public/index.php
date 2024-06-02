@@ -44,7 +44,7 @@ $app->add(new AddJsonResponseHeader);
 
 $app->delete("/api/posts/{id:[0-9]+}", App\Controllers\PostController::class. ':delete');
 
-$app->get("/api/login", UserController::class. ':login');
+$app->post("/api/login", UserController::class. ':login');
 
 $app->run();
 
