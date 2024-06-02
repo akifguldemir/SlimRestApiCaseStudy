@@ -11,6 +11,6 @@
 
 -php -S localhost:8080 -t public/ komutu ile çalıştırılabilir.
 
-
+Slim ve react projelerinin tanıtım videosu:  https://app.usebubbles.com/jY1GoWTNdYcr7KWvLamEiu
 
 
