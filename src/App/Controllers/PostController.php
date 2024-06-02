@@ -31,7 +31,7 @@ class PostController
 
         if ($rows > 0) {
             $body = json_encode([
-                'message' => 'Post deleted',
+                'message' => 'Post silindi',
                 'affectedRows' => $rows,
                 'code' => 200,
             ]);
