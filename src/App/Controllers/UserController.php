@@ -20,9 +20,9 @@ class UserController
         $queryParams = $request->getQueryParams();
         $email = $queryParams['email'] ?? null;
         $password = $queryParams['password'] ?? null;
+
         if ($email && $password) {
             $user = $this->repository->findByEmail($email);
-            $result = password_verify($password, $user['password']);
             if ($user && password_verify($password, $user['password'])) {
                 if ($user['role'] === 'role_admin') {
                     $responseData = json_encode([
