@@ -17,7 +17,7 @@ class PostRepository
 
         $pdo = $this->database->getConnection();
 
-        $stmt = $pdo->query('SELECT * from post');
+        $stmt = $pdo->query('SELECT u.username, p.title, p.body from post p LEFT JOIN user u ON u.Id = p.userId');
 
         return  $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -40,7 +40,6 @@ class PostRepository
             $stmt->execute();
             return $pdo->lastInsertId();
         } catch (\PDOException $e) {
-            // Hata durumunda bir loglama mekanizması veya başka bir işlem gerçekleştirebilirsiniz
             throw new \Exception("Post kaydedilemedi: " . $e->getMessage());
         }
     }
