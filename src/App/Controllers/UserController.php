@@ -27,7 +27,9 @@ class UserController
                 if ($user['role'] === 'role_admin') {
                     $responseData = json_encode([
                         'status' => 'success',
-                        'user' => $user
+                        'message' => 'Login başarılı. Yönlendiriliyor..',
+                        'user' => $user,
+                        'code' => 200
                     ]);
                     $response->getBody()->write($responseData); 
                     return $response->withHeader('Content-Type', 'application/json')
