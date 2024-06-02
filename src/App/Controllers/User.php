@@ -20,19 +20,29 @@ class User
         $queryParams = $request->getQueryParams();
         $email = $queryParams['email'] ?? null;
         $password = $queryParams['password'] ?? null;
-
         if ($email && $password) {
             $user = $this->repository->findByEmail($email);
-
+            $result = password_verify($password, $user['password']);
             if ($user && password_verify($password, $user['password'])) {
-                $responseData = json_encode([
-                    'status' => 'success',
-                    'user' => $user,
-                    'code' => 200
-                ]);
-
-                $response->getBody()->write($responseData); 
-                return $response->withHeader('Content-Type', 'application/json')->withStatus(200);
+                if ($user['role'] === 'role_admin') {
+                    $responseData = json_encode([
+                        'status' => 'success',
+                        'user' => $user
+                    ]);
+                    $response->getBody()->write($responseData); 
+                    return $response->withHeader('Content-Type', 'application/json')
+                                    ->withStatus(200);
+                } else {
+                    $responseData = json_encode([
+                        'status' => 'error',
+                        'message' => 'Kullanıcı bulunamadı veya hatalı giriş bilgileri',
+                        'code' => 400
+                    ]);
+    
+                    $response->getBody()->write($responseData); 
+                    return $response->withHeader('Content-Type', 'application/json')
+                                    ->withStatus(400);
+                }
             }
         }
 
