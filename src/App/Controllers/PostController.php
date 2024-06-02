@@ -27,6 +27,7 @@ class PostController
 
     public function delete(Request $request, Response $response, array $args): Response
     {
+
         $rows = $this->repository->delete((int)$args['id']);
 
         if ($rows > 0) {
@@ -41,7 +42,7 @@ class PostController
                             ->withStatus(200);
         } else {
             $body = json_encode([
-                'message' => 'Post not found',
+                'message' => 'Post bulunamadı',
                 'affectedRows' => $rows,
                 'code' => 404,
             ]);

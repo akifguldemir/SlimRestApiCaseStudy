@@ -42,7 +42,7 @@ $error_handler->forceContentType("application/json");
 
 $app->add(new AddJsonResponseHeader);
 
-$app->delete("/api/posts/{id:[0-9]+}", App\Controllers\PostController::class. ':delete');
+$app->delete("/api/posts/{id:[0-9]+}", PostController::class. ':delete');
 
 $app->post("/api/login", UserController::class. ':login');
 
