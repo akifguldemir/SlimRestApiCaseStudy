@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 use DI\ContainerBuilder;
 use Slim\Factory\AppFactory;
+use App\Controllers\PostController;
+use App\Controllers\UserController;
 use App\Middleware\AddJsonResponseHeader;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Factory\ServerRequestCreatorFactory;
@@ -21,7 +23,7 @@ $app = AppFactory::create();
 
 // $serverRequest = ServerRequestCreatorFactory::create();
 
-$app->get('/api/posts', App\Controllers\Post::class. ':showAll');
+$app->get('/api/posts', PostController::class. ':showAll');
 
 $error_middleware = $app->addErrorMiddleware(true, true, true);
 
@@ -30,9 +32,9 @@ $error_handler->forceContentType("application/json");
 
 $app->add(new AddJsonResponseHeader);
 
-$app->delete("/api/posts/{id:[0-9]+}", App\Controllers\Post::class. ':delete');
+$app->delete("/api/posts/{id:[0-9]+}", App\Controllers\PostController::class. ':delete');
 
-$app->get("/api/login", App\Controllers\User::class. ':login');
+$app->get("/api/login", UserController::class. ':login');
 
 $app->run();
 

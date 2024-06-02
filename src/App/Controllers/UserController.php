@@ -8,7 +8,7 @@ use App\Repositories\UserRepository;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-class User
+class UserController
 {
     public function __construct(private UserRepository $repository)
     {
