@@ -44,6 +44,6 @@ class UserRepository
         $stmt->bindValue(":email", $email, PDO::PARAM_STR);
         $stmt->execute();
 
-        return $stmt->rowCount();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }
