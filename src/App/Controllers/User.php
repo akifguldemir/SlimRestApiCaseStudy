@@ -27,21 +27,23 @@ class User
             if ($user && password_verify($password, $user['password'])) {
                 $responseData = json_encode([
                     'status' => 'success',
-                    'user' => $user
+                    'user' => $user,
+                    'code' => 200
                 ]);
 
                 $response->getBody()->write($responseData); 
-                return $response->withHeader('Content-Type', 'application/json');
+                return $response->withHeader('Content-Type', 'application/json')->withStatus(200);
             }
         }
 
         $responseData = json_encode([
             'status' => 'error',
-            'message' => 'Kullanıcı bulunamadı veya hatalı giriş bilgileri'
+            'message' => 'Kullanıcı bulunamadı veya hatalı giriş bilgileri',
+            'code' => 400
         ]);
 
         $response->getBody()->write($responseData); 
-        return $response->withHeader('Content-Type', 'application/json');     
+        return $response->withHeader('Content-Type', 'application/json')->withStatus(400);    
     }
 
    

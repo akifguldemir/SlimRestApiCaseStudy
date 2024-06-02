@@ -29,13 +29,27 @@ class Post
     {
         $rows = $this->repository->delete((int)$args['id']);
 
-        $body = json_encode([
-            'message' => 'Post deleted',
-            'rows' => $rows
-        ]);
+        if ($rows > 0) {
+            $body = json_encode([
+                'message' => 'Post deleted',
+                'affectedRows' => $rows,
+                'code' => 200,
+            ]);
 
-        $response->getBody()->write($body); 
-        return $response;
+            $response->getBody()->write($body); 
+            return $response->withHeader('Content-Type', 'application/json')
+                            ->withStatus(200);
+        } else {
+            $body = json_encode([
+                'message' => 'Post not found',
+                'affectedRows' => $rows,
+                'code' => 404,
+            ]);
+
+            $response->getBody()->write($body); 
+            return $response->withHeader('Content-Type', 'application/json')
+                            ->withStatus(404);
+        }
     }
 
    
