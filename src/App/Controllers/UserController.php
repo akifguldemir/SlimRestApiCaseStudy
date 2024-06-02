@@ -15,9 +15,9 @@ class UserController
     }
 
     
-    public function login(Request $request, Response $response, array $args): Response
+    public function login(Request $request, Response $response): Response
     {
-        $queryParams = $request->getQueryParams();
+        $queryParams = $request->getParsedBody();
         $email = $queryParams['email'] ?? null;
         $password = $queryParams['password'] ?? null;
 
