@@ -12,6 +12,7 @@ class UserController
 {
     public function __construct(private UserRepository $repository)
     {
+        $test = 1;
     }
 
     
@@ -20,7 +21,6 @@ class UserController
         $queryParams = $request->getParsedBody();
         $email = $queryParams['email'] ?? null;
         $password = $queryParams['password'] ?? null;
-
         if ($email && $password) {
             $user = $this->repository->findByEmail($email);
             if ($user && password_verify($password, $user['password'])) {
